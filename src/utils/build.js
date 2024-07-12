@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const project = process.argv[2];
 
 if (!project) {
-    console.error('Please specify a project: npm run build project1');
+    console.error('Please specify a project: pnpm run build projectName');
     process.exit(1);
 }
 

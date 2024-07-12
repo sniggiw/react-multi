@@ -1,15 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Home from '../views/Home'
-import About from '../views/About'
+import Index from '../views/Index'
+import Info from '../views/Info'
 
 const router = createBrowserRouter([
     {
         index: true,
-        element: <Home />
+        element: <Index />
     },
     {
         path: 'about',
-        element: <About />,
+        element: <Info />,
     }
 ])
 

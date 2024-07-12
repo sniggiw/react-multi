@@ -1,5 +1,5 @@
 export default function About() {
     return (
-        <main>project1 about</main>
+        <main>五年大运 about</main>
     )
 }
