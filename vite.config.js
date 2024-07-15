@@ -47,6 +47,8 @@ export default defineConfig(({ command, mode }) => {
                         rootValue: 37.5,
                         propList: ['*'], // 需要转换的属性，默认转换所有属性
                         selectorBlackList: [],// CSS选择器黑名单，防止部分选择器被转换
+                        // minPixelValue: 2,// 最小像素值，小于该值的不会被转换
+                        // unitPrecision: 3,// 转换后的精度，即保留多少位小数
                         exclude: /\/node_modules\//i, // 忽略包文件转换rem
                     })
                 ]
