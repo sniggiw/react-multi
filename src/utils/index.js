@@ -1,5 +1,5 @@
 // 引入 decimal.js 库
-import Decimal from 'decimal.js';
+import Decimal from "decimal.js";
 
 // 获取当前屏幕的宽度
 export function getScreenWidth() {
@@ -13,7 +13,7 @@ export function pxToRem(pxValue) {
     // 计算 1rem 的值
     const remValue = new Decimal(screenWidth).div(10);
     // 返回转换后的 rem 值
-    return new Decimal(pxValue).div(remValue) + 'rem';
+    return new Decimal(pxValue).div(remValue) + "rem";
 }
 
 export function getPointPosition(point) {
@@ -27,35 +27,40 @@ export function getPointPosition(point) {
     return { x: centerX, y: centerY };
 }
 
-export function drawLine(startObj, endObj) {
-    // 起点坐标
-    const startY = startObj.y;
-    const startX = startObj.x;
+export function drawLine(id1, id2) {
+    // 获取两个点的元素
+    const element1 = document.getElementById(`${id1}`);
+    const element2 = document.getElementById(`${id2}`);
 
-    // 终点坐标
-    const endY = endObj.y;
-    const endX = endObj.x;
+    // 检查元素是否存在
+    if (!element1 || !element2) {
+        throw new Error("元素未找到");
+    }
 
-    // 用勾股定律计算出斜边长度及其夹角（即连线的旋转角度）
-    const a = endX - startX;
-    const b = endY - startY;
-    // 计算连线长度
-    const length = Math.sqrt(a * a + b * b);
-    // 弧度值转换为角度值
-    const c = (180 * Math.atan2(b, a)) / Math.PI;
+    // 获取元素的位置
+    const rect1 = element1.getBoundingClientRect();
+    const rect2 = element2.getBoundingClientRect();
 
-    // 连线中心坐标
-    const midX = (endX + startX) / 2;
-    const midY = (endY + startY) / 2;
-    const deg = c <= -90 ? 360 + c : c; // 负角转换为正角
+    // 获取两个点的坐标
+    const x1 = rect1.left + rect1.width / 2;
+    const y1 = rect1.top + rect1.height / 2;
+    const x2 = rect2.left + rect2.width / 2;
+    const y2 = rect2.top + rect2.height / 2;
+
+    // 计算两点之间的距离取绝对值）
+    const distance = Math.abs(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
+
+    // 计算两点之间的角度
+    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI); // 将弧度转换为角度
 
     return {
-        position: 'absolute',
-        top: `${midY}px`,
-        left: `${midX - length / 2}px`,
-        width: `${length}px`,
-        height: `1px`,
-        transform: `rotate(${deg}deg)`,
-        backgroundColor: '#fff'
+        position: "absolute",
+        left: pxToRem(x1),
+        top: pxToRem(y1 - rect1.height / 2),
+        width: pxToRem(distance),
+        height: pxToRem(1),
+        transform: `rotate(${angle}deg)`,
+        transformOrigin: "left center",
+        backgroundColor: "#fff",
     };
 }
