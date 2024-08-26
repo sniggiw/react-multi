@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import { drawLine } from "@utils";
+import { useEffect, useState } from "react";
+import gsap from "gsap";
+import { pxToRem, drawLine } from "@utils";
 
 import Marquee from "@components/Marquee";
 import styles from "./styles.module.less";
@@ -16,6 +17,8 @@ const STAR_OBJ = {
 };
 
 export default function Index() {
+    const animaTimeLine = gsap.timeline();
+
     const [lineState, setLineState] = useState([]);
 
     const getTheLineState = () => {
@@ -23,6 +26,16 @@ export default function Index() {
             const res = drawLine(`star${i + 1}`, `star${i + 2}`);
             setLineState((prev) => [...prev, res]);
         }
+
+        handleNewLine();
+    };
+
+    const handleNewLine = () => {
+        animaTimeLine
+            .fromTo("#star1", { opacity: 0, scale: 0 }, { opacity: 1, scale: 2, duration: 0.5 })
+            .to("#star1", { scale: 1, duration: 0.5 }, "+=.5")
+            .to("#text1", { opacity: 1, scale: 1, top: pxToRem(280), left: pxToRem(21), duration: .3 })
+            .fromTo("#line1", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: .5 })
     };
 
     useEffect(() => {
@@ -30,6 +43,7 @@ export default function Index() {
 
         return () => {
             setLineState([]);
+            gsap.killTweensOf("*");
         };
     }, []);
 
@@ -75,7 +89,7 @@ export default function Index() {
                         </div>
                         <div className={styles["star-line"]}>
                             {lineState.map((item, index) => {
-                                return <div id={`line${index + 1}`} key={`line${index + 1}`} style={{ ...item }}></div>;
+                                return <div id={`line${index + 1}`} key={`line${index + 1}`} className={styles["line"]} style={{ ...item }}></div>;
                             })}
                         </div>
                     </div>

@@ -20,9 +20,9 @@ importers:
       decimal.js:
         specifier: ^10.4.3
         version: 10.4.3
-      gasp:
-        specifier: ^0.0.2
-        version: 0.0.2
+      gsap:
+        specifier: ^3.12.5
+        version: 3.12.5
       postcss-pxtorem:
         specifier: ^6.1.0
         version: 6.1.0(postcss@8.4.39)
@@ -843,9 +843,6 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
-  gasp@0.0.2:
-    resolution: {integrity: sha512-cJGS8HkASZXLtYnS7CHDUCutYdeV2OXW/P+SU03+allNY26GiYOfstziPjnsMW8bbdf6hoQ3caVHYNZ0YLuFCA==}
-
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -886,6 +883,9 @@ packages:
 
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
+
+  gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
 
   has-bigints@1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
@@ -1255,14 +1255,6 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
-
-  q@1.5.1:
-    resolution: {integrity: sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==}
-    engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
-    deprecated: |-
-      You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
-      (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -2424,10 +2416,6 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
-  gasp@0.0.2:
-    dependencies:
-      q: 1.5.1
-
   gensync@1.0.0-beta.2: {}
 
   get-intrinsic@1.2.4:
@@ -2476,6 +2464,8 @@ snapshots:
     optional: true
 
   graphemer@1.4.0: {}
+
+  gsap@3.12.5: {}
 
   has-bigints@1.0.2: {}
 
@@ -2826,8 +2816,6 @@ snapshots:
     optional: true
 
   punycode@2.3.1: {}
-
-  q@1.5.1: {}
 
   queue-microtask@1.2.3: {}
 
