@@ -170,6 +170,52 @@
         .line {
             opacity: 0;
         }
+
+        .year-wish {
+            position: absolute;
+            top: 435px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 120px;
+            height: 17px;
+            overflow: hidden;
+
+            .year-wish_item {
+                display: none;
+                width: 100%;
+            }
+
+            .year-wish_item1 {
+                display: block;
+                width: 100%;
+            }
+        }
+
+        .rule-box {
+            position: absolute;
+            top: 460px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            padding-top: 5px;
+            width: 100%;
+            height: 51px;
+            background: url("../../assets/imgs/index/rule_bg.png") no-repeat left top / 100% 100%;
+
+            overflow: hidden;
+
+            .rule-top {
+                display: flex;
+
+                .rule-line {
+                    margin-right: 10px;
+                    width: 1px;
+                    height: 10px;
+                    background-color: #fff;
+                }
+            }
+        }
     }
 
     .start-btn {

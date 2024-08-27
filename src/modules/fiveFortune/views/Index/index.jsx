@@ -17,6 +17,14 @@ const STAR_OBJ = {
     dixing: "帝星",
 };
 
+const YEAR_WISH = {
+    2024: "幸运天降",
+    2025: "喜结良缘",
+    2026: "财富暴涨",
+    2027: "职位高升",
+    2028: "平安顺遂",
+};
+
 export default function Index() {
     const animaTimeLine = gsap.timeline();
 
@@ -34,7 +42,7 @@ export default function Index() {
 
     const handleStart = () => {
         navigate("/info");
-    }
+    };
 
     const handleNewLine = () => {
         animaTimeLine
@@ -134,6 +142,28 @@ export default function Index() {
                             {lineState.map((item, index) => {
                                 return <div id={`line${index + 1}`} key={`line${index + 1}`} className={styles["line"]} style={{ ...item }}></div>;
                             })}
+                        </div>
+
+                        <div className={styles["year-wish"]}>
+                            {Object.entries(YEAR_WISH).map((item, index) => {
+                                return (
+                                    <img
+                                        id={`year-wish_item${index + 1}`}
+                                        key={item[0]}
+                                        className={`${styles["year-wish_item"]} ${styles[`year-wish_item${index + 1}`]}`}
+                                        src={`../../assets/imgs/index/index_${item[0]}text.png`}
+                                        alt={item[1]}
+                                    />
+                                );
+                            })}
+                        </div>
+
+                        <div className={styles["rule-box"]}>
+                            <div className={styles["rule-top"]}>
+                                {Array.from({ length: 26 }).map((_, index) => {
+                                    return <div key={`rule-line${index + 1}`} className={styles["rule-line"]}></div>;
+                                })}
+                            </div>
                         </div>
                     </div>
                     <div className={styles["start-btn"]} onClick={handleStart}></div>
