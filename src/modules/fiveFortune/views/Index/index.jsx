@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { pxToRem, drawLine } from "@utils";
 
@@ -19,6 +20,8 @@ const STAR_OBJ = {
 export default function Index() {
     const animaTimeLine = gsap.timeline();
 
+    const navigate = useNavigate();
+
     const [lineState, setLineState] = useState([]);
     const lineContainerRef = useRef(null);
 
@@ -28,6 +31,10 @@ export default function Index() {
             setLineState((prev) => [...prev, res]);
         }
     };
+
+    const handleStart = () => {
+        navigate("/info");
+    }
 
     const handleNewLine = () => {
         animaTimeLine
@@ -129,7 +136,9 @@ export default function Index() {
                             })}
                         </div>
                     </div>
+                    <div className={styles["start-btn"]} onClick={handleStart}></div>
                 </div>
+
                 <div className={styles["introduce-box"]}>
                     {Array.from({ length: 5 }).map((_, index) => {
                         return (
