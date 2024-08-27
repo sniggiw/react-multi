@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { pxToRem, drawLine } from "@utils";
 
@@ -20,32 +20,68 @@ export default function Index() {
     const animaTimeLine = gsap.timeline();
 
     const [lineState, setLineState] = useState([]);
+    const lineContainerRef = useRef(null);
 
     const getTheLineState = () => {
         for (let i = 0; i < 6; i++) {
             const res = drawLine(`star${i + 1}`, `star${i + 2}`);
             setLineState((prev) => [...prev, res]);
         }
-
-        handleNewLine();
     };
 
     const handleNewLine = () => {
         animaTimeLine
-            .fromTo("#star1", { opacity: 0, scale: 0 }, { opacity: 1, scale: 2, duration: 0.5 })
-            .to("#star1", { scale: 1, duration: 0.5 }, "+=.5")
-            .to("#text1", { opacity: 1, scale: 1, top: pxToRem(280), left: pxToRem(21), duration: .3 })
-            .fromTo("#line1", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: .5 })
+            .add(handleCommonAnimation(1, 280, 21))
+            .add(handleCommonAnimation(2, 198, 55), "+=.3")
+            .add(handleCommonAnimation(3, 248, 130), "+=.3")
+            .add(handleCommonAnimation(4, 190, 187), "+=.3")
+            .add(handleCommonAnimation(5, 264, 224), "+=.3")
+            .add(handleCommonAnimation(6, 221, 321), "+=.3")
+            .add(handleCommonAnimation(7, 157, 251), "+=.3")
+            .add(handleCommonAnimation(8, 145, 170), "+=.3")
+            .repeat(-1) // 无限循环
+            .repeatDelay(2); // 每次循环之间的延迟时间
+    };
+
+    const handleCommonAnimation = (num, top, left) => {
+        let commonAniLine = gsap.timeline();
+        if (num < 7) {
+            commonAniLine
+                .fromTo(`#star${num}`, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1.3, duration: 0.5 })
+                .to(`#text${num}`, { opacity: 1, scale: 1, top: pxToRem(top), left: pxToRem(left), duration: 0.2 }, "+=.3")
+                .to(`#star${num}`, { scale: 1, duration: 0.3 }, "+=.3")
+                .fromTo(`#line${num}`, { opacity: 0, scale: 0 }, { opacity: 0.8, scale: 1, duration: 0.7 }, "+=.2");
+
+            return commonAniLine;
+        } else {
+            commonAniLine
+                .fromTo(`#star${num}`, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1.3, duration: 0.5 })
+                .to(`#star${num}`, { scale: 1, duration: 0.5 }, "+=.3")
+                .to(`#text${num}`, { opacity: 1, scale: 1, top: pxToRem(top), left: pxToRem(left), duration: 0.3 }, "+=.2");
+
+            return commonAniLine;
+        }
     };
 
     useEffect(() => {
         getTheLineState();
-
         return () => {
             setLineState([]);
-            gsap.killTweensOf("*");
+            animaTimeLine.revert();
         };
     }, []);
+
+    // 确保 line 存在后才开始执行动画
+    useEffect(() => {
+        const lines = lineContainerRef.current.querySelectorAll(`.${styles["line"]}`);
+        if (lines.length > 0) {
+            handleNewLine();
+        }
+
+        return () => {
+            animaTimeLine.revert();
+        };
+    }, [lineState]);
 
     return (
         <>
@@ -87,7 +123,7 @@ export default function Index() {
                                 );
                             })}
                         </div>
-                        <div className={styles["star-line"]}>
+                        <div className={styles["star-line"]} ref={lineContainerRef}>
                             {lineState.map((item, index) => {
                                 return <div id={`line${index + 1}`} key={`line${index + 1}`} className={styles["line"]} style={{ ...item }}></div>;
                             })}
